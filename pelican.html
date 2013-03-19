@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Pelican History of Art</title>
+    <meta name="description" content="An exploration of typefaces used by Jan Tschihold in his 1947 cover for The Pelican History of Art.">
+    <meta name="author" content="Cassini Nazir">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="font.js"></script>
+	<style type="text/css">
+	body {
+		font-size: 300%;
+		line-height:1.125em; /* 16x1.125=18px */
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		background: #f6f6c0;
+		-webkit-box-shadow: inset 0px 0px 6.75em 0px rgba(0, 0, 0, .1);
+		box-shadow: inset 0px 0px 6.75em 0px rgba(0, 0, 0, .1);
+	}
+	hgroup {
+		text-transform: none;
+	}
+	hgroup * {
+		font-weight: normal;
+		margin: 0 !important;
+		padding: 0 !important;
+		white-space: nowrap; /* ensure the lines will never wrap */
+	}
+	h1 { 
+		font-family: "Felix Titling";
+		font-size: 3.3125em; /* 16 x 3.3125 = 53px */
+		line-height: 1.45; 
+		letter-spacing: .1em;
+		-webkit-font-smoothing: antialiased; 
+		/*  make letters look thinner on Mac systems 
+			http://www.usabilitypost.com/2012/11/05/stop-fixing-font-smoothing */
+	}
+	h2 {
+		font-family: "Felix Titling";
+		font-size: .5em; /* 16 x .5 = 8px */
+		letter-spacing: .42em;
+		line-height: .45em;
+		margin-bottom: 5em;
+		color:#A92817;
+	}
+	.kerned { 
+		letter-spacing:-.05em; /* fancy R's give us trouble! Must kern */
+	}
+	footer {
+		background: url(pelican.svg) no-repeat 50% 50%;
+		background-size: contain;
+		margin: .25em auto 0 auto;
+		height: 5.05em; 
+	}
+	article { padding: 1em 0 6em 0;}
+	section {
+		font: italic .25em/1.2em "Georgia";
+		padding-top:1.2em;
+		background: #f6f6c0;
+	}
+	</style>
+  </head>
+  <body>
+	<article>
+	  	<hgroup>
+		    <h1>The</h1>
+		    <h2>To Be Published by <h2>
+		    <h1>Pelican <h1>
+		    <h2>Penguin Books Limited</h2>
+		    <h1>Histo<span class="kerned">ry</span></h1>
+		    <h2>Harmondsworth &middot; Middlesex</h2>
+		    <h1>of A<span class="kerned">rt</span></h1>
+    	</hgroup>
+    	<footer>
+    	</footer>
+    </article>
+    <section>
+    	<p>An exploration of typefaces used by Jan Tschihold in his 1947 cover for The Pelican History of Art.</p>
+    </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+    /*	https://gist.github.com/elclanrs/4341016 */
+	(function( $, window ){
+
+	  var $win = $(window), _css = $.fn.css;
+
+	  function viewportToPixel( val ) {
+	    var percent = val.match(/[\d.]+/)[0] / 100
+	      , unit = val.match(/[vwh]+/)[0];
+	    return (unit == 'vh' ? $win.height() : $win.width()) * percent +'px';
+	  }
+
+	  function parseProps( props ) {
+	    var p, prop;
+	    for ( p in props ) {
+	      prop = props[ p ];
+	      if ( /[vwh]$/.test( prop ) ) {
+	        props[ p ] = viewportToPixel( prop );
+	      }
+	    }
+	    return props;
+	  }
+
+	  $.fn.css = function( props ) {
+	    var self = this
+	      , update = function() {
+	          return _css.call( self, parseProps( $.extend( {}, props ) ) );
+	        };
+	    $win.resize( update ).resize();
+	    return update();
+	  };
+
+	}( jQuery, window ));
+
+	// Usage:
+	$('article').css({
+	  width: '100vw',
+	  fontSize: '3vw'
+	});
+    </script>
+  </body>
+</html>
